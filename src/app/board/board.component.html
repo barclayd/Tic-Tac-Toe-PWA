@@ -1,1 +1,15 @@
-<h3>game board</h3>
+<h2>Next move: {{ currentPlayer }}</h2>
+<button *ngIf="didStartGame" (click)="setupGame()">
+  {{ winner ? 'Start a new game' : 'Reset game' }}
+</button>
+
+<h2 *ngIf="winner">Player {{ winner }} won the game!</h2>
+<h2 *ngIf="isNoWinner">A stalemate! Click above to start a new game!</h2>
+
+<main>
+  <app-square
+    *ngFor="let square of squares; let i = index"
+    [value]="square"
+    (click)="makeMove(i)"
+  ></app-square>
+</main>

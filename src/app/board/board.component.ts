@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from '../types/player';
 
 const NUMBER_OF_SQUARES = 9;
 const lines = [
@@ -10,7 +11,6 @@ const lines = [
   [2, 5, 8],
   [0, 1, 2],
 ];
-type player = 'X' | 'O';
 
 @Component({
   selector: 'app-board',
@@ -18,31 +18,44 @@ type player = 'X' | 'O';
   styleUrls: ['./board.component.scss'],
 })
 export class Board implements OnInit {
-  squares!: (player | undefined)[];
+  squares!: (Player | undefined)[];
   xIsNext!: boolean;
-  winner: player | undefined;
+  winner: Player | undefined;
 
   ngOnInit() {
     this.setupGame();
   }
 
-  private setupGame() {
+  setupGame() {
     this.squares = Array(NUMBER_OF_SQUARES).fill(undefined);
-    this.xIsNext = true;
+    this.xIsNext = Math.random() >= 0.5;
+    this.winner = undefined;
   }
 
-  get currentPlayer(): player {
+  get currentPlayer(): Player {
     return this.xIsNext ? 'X' : 'O';
   }
 
+  get isGameFinished() {
+    return !this.squares.includes(undefined);
+  }
+
+  get isNoWinner() {
+    return this.isGameFinished && !this.winner;
+  }
+
+  get didStartGame() {
+    return this.squares.some((square) => square === 'X' || square === 'O');
+  }
+
   makeMove(index: number) {
+    if (this.winner) {
+      return;
+    }
     if (!this.squares[index]) {
       this.squares.splice(index, 1, this.currentPlayer);
       this.xIsNext = !this.xIsNext;
       this.calculateWinner();
-      if (this.winner) {
-        // we have a winner!
-      }
     }
   }
 
@@ -54,7 +67,7 @@ export class Board implements OnInit {
         this.squares[a] === this.squares[b] &&
         this.squares[a] === this.squares[c]
       ) {
-        this.winner = this.squares[a] as player;
+        this.winner = this.squares[a] as Player;
       }
     });
   }
