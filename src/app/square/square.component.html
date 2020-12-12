@@ -1,1 +1,17 @@
-<p [style]="{ color: value === 'X' ? '#0080ff' : '#ff7f00' }">{{ value }}</p>
+<button
+  nbButton
+  hero
+  *ngIf="!value"
+  [style]="{ color: value === 'X' ? '#0080ff' : '#ff7f00', padding: '46% 44%', fontSize: '50px', boxSizing: 'border-box'}"
+>
+  {{ value }}
+</button>
+<button
+  nbButton
+  hero
+  *ngIf="value"
+  [status]="value === 'X' ? 'success' : 'info'"
+  [style]="{ color: value === 'X' ? '#0080ff' : '#ff7f00', padding: '42% 34%', fontSize: '50px', boxSizing: 'border-box'}"
+>
+  {{ value }}
+</button>

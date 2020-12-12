@@ -9,7 +9,8 @@ const lines = [
   [0, 3, 6],
   [1, 4, 7],
   [2, 5, 8],
-  [0, 1, 2],
+  [0, 4, 8],
+  [2, 4, 6],
 ];
 
 @Component({
@@ -17,7 +18,7 @@ const lines = [
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class Board implements OnInit {
+export class BoardComponent implements OnInit {
   squares!: (Player | undefined)[];
   xIsNext!: boolean;
   winner: Player | undefined;
