@@ -1,5 +1,5 @@
 <h2>Next move: {{ currentPlayer }}</h2>
-<button *ngIf="didStartGame" (click)="setupGame()">
+<button nbButton outline status="danger" *ngIf="didStartGame" (click)="setupGame()">
   {{ winner ? 'Start a new game' : 'Reset game' }}
 </button>
 
