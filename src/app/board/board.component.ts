@@ -17,7 +17,7 @@ const lines = [
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class Board implements OnInit {
+export class BoardComponent implements OnInit {
   squares!: (Player | undefined)[];
   xIsNext!: boolean;
   winner: Player | undefined;

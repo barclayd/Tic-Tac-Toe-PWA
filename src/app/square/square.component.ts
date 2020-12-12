@@ -6,6 +6,6 @@ import { Player } from '../types/player';
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.scss'],
 })
-export class Square {
+export class SquareComponent {
   @Input() value?: Player;
 }
