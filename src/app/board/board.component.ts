@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Player } from '../types/player';
 
 const NUMBER_OF_SQUARES = 9;
 const lines = [
@@ -10,7 +11,6 @@ const lines = [
   [2, 5, 8],
   [0, 1, 2],
 ];
-type player = 'X' | 'O';
 
 @Component({
   selector: 'app-board',
@@ -18,20 +18,20 @@ type player = 'X' | 'O';
   styleUrls: ['./board.component.scss'],
 })
 export class Board implements OnInit {
-  squares!: (player | undefined)[];
+  squares!: (Player | undefined)[];
   xIsNext!: boolean;
-  winner: player | undefined;
+  winner: Player | undefined;
 
   ngOnInit() {
     this.setupGame();
   }
 
-  private setupGame() {
+  setupGame() {
     this.squares = Array(NUMBER_OF_SQUARES).fill(undefined);
     this.xIsNext = true;
   }
 
-  get currentPlayer(): player {
+  get currentPlayer(): Player {
     return this.xIsNext ? 'X' : 'O';
   }
 
@@ -54,7 +54,7 @@ export class Board implements OnInit {
         this.squares[a] === this.squares[b] &&
         this.squares[a] === this.squares[c]
       ) {
-        this.winner = this.squares[a] as player;
+        this.winner = this.squares[a] as Player;
       }
     });
   }
