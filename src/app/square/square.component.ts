@@ -7,5 +7,5 @@ import { Player } from '../types/player';
   styleUrls: ['./square.component.scss'],
 })
 export class Square {
-  @Input() value!: Player;
+  @Input() value?: Player;
 }
