@@ -1,7 +1,10 @@
-<h3>Current Player: {{ currentPlayer }}</h3>
-<button (click)="setupGame()">Start a New Game</button>
+<h2>Next move: {{ currentPlayer }}</h2>
+<button *ngIf="didStartGame" (click)="setupGame()">
+  {{ winner ? 'Start a new game' : 'Reset game' }}
+</button>
 
 <h2 *ngIf="winner">Player {{ winner }} won the game!</h2>
+<h2 *ngIf="isNoWinner">A stalemate! Click above to start a new game!</h2>
 
 <main>
   <app-square

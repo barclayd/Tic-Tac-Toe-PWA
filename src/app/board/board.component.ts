@@ -28,21 +28,34 @@ export class Board implements OnInit {
 
   setupGame() {
     this.squares = Array(NUMBER_OF_SQUARES).fill(undefined);
-    this.xIsNext = true;
+    this.xIsNext = Math.random() >= 0.5;
+    this.winner = undefined;
   }
 
   get currentPlayer(): Player {
     return this.xIsNext ? 'X' : 'O';
   }
 
+  get isGameFinished() {
+    return !this.squares.includes(undefined);
+  }
+
+  get isNoWinner() {
+    return this.isGameFinished && !this.winner;
+  }
+
+  get didStartGame() {
+    return this.squares.some((square) => square === 'X' || square === 'O');
+  }
+
   makeMove(index: number) {
+    if (this.winner) {
+      return;
+    }
     if (!this.squares[index]) {
       this.squares.splice(index, 1, this.currentPlayer);
       this.xIsNext = !this.xIsNext;
       this.calculateWinner();
-      if (this.winner) {
-        // we have a winner!
-      }
     }
   }
 
